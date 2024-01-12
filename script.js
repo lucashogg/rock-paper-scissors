@@ -46,25 +46,29 @@ function game() {
         // Prompt user for input
         const playerSelection = prompt("Enter selection: ", "rock, paper, or scissors");
 
-        // Generate computer's choice
-        function getComputerChoice() {
-            const random = Math.floor(Math.random() * choices.length);
-            return choices[random];
-        }
-        // Store computer's choice
-        const computerSelection = getComputerChoice();
+        if (choices.indexOf(playerSelection.toLowerCase()) >= 0) {
+            // Generate computer's choice
+            function getComputerChoice() {
+                const random = Math.floor(Math.random() * choices.length);
+                return choices[random];
+            }
+            // Store computer's choice
+            const computerSelection = getComputerChoice();
 
-        // Play a single round
-        let round = playRound(playerSelection, computerSelection);
-        // If tie, play again
-        if (round === "tie") {
-            console.log("It's a tie! Play again.");
+            // Play a single round
+            let round = playRound(playerSelection, computerSelection);
+            // If tie, play again
+            if (round === "tie") {
+                console.log("It's a tie! Play again.");
+                continue;
+            }
+            // If win/lose, print results
+            console.log(round);
+            // Add to round count
+            roundCount++;
+        } else {
             continue;
         }
-        // If win/lose, print results
-        console.log(round);
-        // Add to round count
-        roundCount++;
     }
 
     // If player or computer wins print results
