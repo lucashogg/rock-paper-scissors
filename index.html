@@ -4,11 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
     <title>Rock Paper Scissors</title>
 </head>
 
 <body>
-    <script src="script.js"></script>
+    <header class="header">
+        <div class="container">
+            <h1>Rock • Paper • Scissors</h1>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <div class="score">
+                <p>Player: <span id="player-score">0</span></p>
+                <p>Computer: <span id="computer-score">0</span></p>
+            </div>
+            <div class="round-result">
+                <p id="result"></p>
+            </div>
+            <div class="buttons">
+                <ul class="button-list">
+                    <li>
+                        <button id="rock" type="button">Rock</button>
+                    </li>
+                    <li>
+                        <button id="paper" type="button">Paper</button>
+                    </li>
+                    <li>
+                        <button id="scissors" type="button">Scissors</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="game-count">
+                <p>Game Count: <span id="count-number">0</span></p>
+            </div>
+            <div class="pop-up-bg display-none">
+                <div id="winner-div" class="pop-up">
+                    <p id="winner"></p>
+                    <button id="play-again-btn" type="button">Play again?</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>The Odin Project - Lucas Hogg 2024</p>
+        </div>
+    </footer>
 </body>
 
 </html>

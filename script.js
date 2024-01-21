@@ -1,80 +1,104 @@
-// Prompt user for selection (rock, paper, or scissors) and store it in a variable
-// Randomly generate the computer's selection and store it in a variable
-// Compare user vs computer
+// Declare game choices
+const choices = ["rock", "paper", "scissors"];
+// Initialize game counter
+let roundCount = 0;
+// Initialize winning tally
+let playerWins = 0;
+let computerWins = 0;
+// Get html elements
+const playerSpan = document.querySelector("#player-score");
+const computerSpan = document.querySelector("#computer-score");
+const roundResult = document.querySelector("#result");
+const gameCountSpan = document.querySelector("#count-number");
+const buttons = document.querySelectorAll(".button-list > li > button");
+const winnerDiv = document.querySelector(".pop-up-bg");
 
-// rock > scissors
-// scissors > paper
-// paper > rock
-// if equal it's a tie
+// Play a single round to determine winner
+function playRound(playerSelection, computerSelection) {
+    const player = playerSelection;
+    const computer = computerSelection;
 
-// Return result to user
-
-function game() {
-    // Declare game choices
-    const choices = ["rock", "paper", "scissors"];
-    // Initialize game counter
-    let roundCount = 0;
-    // Initialize winning tally
-    let playerWins = 0;
-    let computerWins = 0;
-
-    // Play a single round to determine winner
-    function playRound(playerSelection, computerSelection) {
-        const player = playerSelection.toLowerCase();
-        const computer = computerSelection.toLowerCase();
-
-        // Compare all choices available and return result
-        if (player === computer) {
-            return "tie";
-        } else if (player === "rock" && computer === "scissors") {
-            playerWins++;
-            return `You win! ${player} beats ${computer}.`;
-        } else if (player === "scissors" && computer === "paper") {
-            playerWins++;
-            return `You win! ${player} beats ${computer}.`;
-        } else if (player === "paper" && computer === "rock") {
-            playerWins++;
-            return `You win! ${player} beats ${computer}.`
-        } else {
-            computerWins++;
-            return `You lose! ${computer} beats ${player}.`;
-        }
-    }
-
-    // Loop game until 5 games (tie excluded) are complete
-    while (roundCount < 5) {
-        // Prompt user for input
-        const playerSelection = prompt("Enter selection: ", "rock, paper, or scissors");
-
-        if (choices.indexOf(playerSelection.toLowerCase()) >= 0) {
-            // Generate computer's choice
-            function getComputerChoice() {
-                const random = Math.floor(Math.random() * choices.length);
-                return choices[random];
-            }
-            // Store computer's choice
-            const computerSelection = getComputerChoice();
-
-            // Play a single round
-            let round = playRound(playerSelection, computerSelection);
-            // If tie, play again
-            if (round === "tie") {
-                console.log("It's a tie! Play again.");
-                continue;
-            }
-            // If win/lose, print results
-            console.log(round);
-            // Add to round count
-            roundCount++;
-        } else {
-            continue;
-        }
-    }
-
-    // If player or computer wins print results
-    if (playerWins > computerWins) {
-        console.log("Congrats! You won the game!");
+    // Compare all choices available and return result
+    if (player === computer) {
+        return "tie";
+    } else if (player === "rock" && computer === "scissors") {
+        playerWins++;
+        return `${player} beats ${computer}.`;
+    } else if (player === "scissors" && computer === "paper") {
+        playerWins++;
+        return `${player} beats ${computer}.`;
+    } else if (player === "paper" && computer === "rock") {
+        playerWins++;
+        return `${player} beats ${computer}.`
     } else {
-        console.log("Uh oh! You lost the game!");
+        computerWins++;
+        return `${computer} beats ${player}.`;
     }
 }
+
+// Reset game after best of 5
+function resetGame() {
+    roundResult.textContent = "";
+    roundCount = 0;
+    playerWins = 0;
+    computerWins = 0;
+    playerSpan.textContent = playerWins;
+    computerSpan.textContent = computerWins;
+    gameCountSpan.textContent = roundCount;
+    winnerDiv.classList.add("display-none");
+}
+
+// Loop game until 5 games (tie excluded) are complete
+buttons.forEach(function (btn) {
+    btn.addEventListener("click", () => {
+        let playerSelection = "";
+        roundResult.textContent = "";
+
+        switch (btn.id) {
+            case "rock":
+                playerSelection = "rock";
+                break;
+            case "paper":
+                playerSelection = "paper";
+                break;
+            case "scissors":
+                playerSelection = "scissors";
+                break;
+        }
+
+        // Get computer's choice
+        function getComputerChoice() {
+            const random = Math.floor(Math.random() * choices.length);
+            return choices[random];
+        }
+        // Store computer's choice
+        const computerSelection = getComputerChoice();
+
+        // Play a single round
+        let round = playRound(playerSelection, computerSelection);
+
+        // If tie, play again
+        if (round === "tie") {
+            roundResult.textContent = "It's a tie!";
+        } else {
+            // If win/lose, print results
+            playerSpan.textContent = playerWins;
+            computerSpan.textContent = computerWins;
+            roundCount++;
+            gameCountSpan.textContent = roundCount;
+            roundResult.textContent = round;
+        }
+
+        // Finish 5 rounds
+        if (roundCount === 5) {
+            const winner = document.querySelector("#winner");
+            const playAgain = document.querySelector("#play-again-btn");
+            // Display popup
+            winnerDiv.classList.remove("display-none");
+            // If player or computer wins print results
+            playerWins > computerWins ? winner.textContent = "You win!" : winner.textContent = "The computer wins!";
+
+            playAgain.addEventListener("click", resetGame);
+        }
+    });
+});
