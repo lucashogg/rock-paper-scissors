@@ -15,19 +15,25 @@ const winnerDiv = document.querySelector(".pop-up-bg");
 
 // Play a single round to determine winner
 function playRound(playerSelection, computerSelection) {
-    const player = playerSelection;
-    const computer = computerSelection;
+    const player = playerSelection
+        .charAt(0)
+        .toUpperCase()
+        + playerSelection.slice(1);
+    const computer = computerSelection
+        .charAt(0)
+        .toUpperCase()
+        + computerSelection.slice(1);
 
     // Compare all choices available and return result
     if (player === computer) {
         return "tie";
-    } else if (player === "rock" && computer === "scissors") {
+    } else if (player === "Rock" && computer === "Scissors") {
         playerWins++;
         return `${player} beats ${computer}.`;
-    } else if (player === "scissors" && computer === "paper") {
+    } else if (player === "Scissors" && computer === "Paper") {
         playerWins++;
         return `${player} beats ${computer}.`;
-    } else if (player === "paper" && computer === "rock") {
+    } else if (player === "Paper" && computer === "Rock") {
         playerWins++;
         return `${player} beats ${computer}.`
     } else {
