@@ -44,7 +44,7 @@ function playRound(playerSelection, computerSelection) {
 
 // Reset game after best of 5
 function resetGame() {
-    roundResult.textContent = "";
+    roundResult.textContent = "Choose an option to begin...";
     roundCount = 0;
     playerWins = 0;
     computerWins = 0;
@@ -98,7 +98,7 @@ buttons.forEach(function (btn) {
         // Finish 5 rounds
         if (roundCount === 5) {
             const winner = document.querySelector("#winner");
-            const playAgain = document.querySelector("#play-again-btn");
+            const playAgain = document.querySelector("#reset-game-btn");
             // Display popup
             winnerDiv.classList.remove("display-none");
             // If player or computer wins print results

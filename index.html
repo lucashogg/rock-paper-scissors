@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1>Rock • Paper • Scissors</h1>
+            <h1 class="title">Rock • Paper • Scissors</h1>
         </div>
     </header>
     <main class="main">
@@ -22,18 +22,18 @@
                 <p>Computer: <span id="computer-score">0</span></p>
             </div>
             <div class="round-result">
-                <p id="result"></p>
+                <p id="result">Choose an option to begin...</p>
             </div>
             <div class="buttons">
                 <ul class="button-list">
                     <li>
-                        <button id="rock" type="button">Rock</button>
+                        <button id="rock" type="button">&#x1FAA8;</button>
                     </li>
                     <li>
-                        <button id="paper" type="button">Paper</button>
+                        <button id="paper" type="button">&#128221;</button>
                     </li>
                     <li>
-                        <button id="scissors" type="button">Scissors</button>
+                        <button id="scissors" type="button">&#9986;&#65039;</button>
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
             <div class="pop-up-bg display-none">
                 <div id="winner-div" class="pop-up">
                     <p id="winner"></p>
-                    <button id="play-again-btn" type="button">Play again?</button>
+                    <button id="reset-game-btn" type="button">Reset Game</button>
                 </div>
             </div>
         </div>
