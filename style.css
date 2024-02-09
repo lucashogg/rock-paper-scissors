@@ -123,6 +123,7 @@ a {
     border-radius: 10px;
     padding: 0;
     border: none;
+    cursor: pointer;
 }
 
 .button-list button:hover {
